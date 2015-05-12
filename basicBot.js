@@ -1,3 +1,19 @@
+Skip to content
+ This repository
+Explore
+Gist
+Blog
+Help
+@h4bUb h4bUb
+ 
+ Watch 21
+  Star 46
+  Fork 349
+Yemasthui/basicBot
+ branch: master  basicBot/basicBot.js
+@BenziBenzi 2 days ago Added Autoskip to !status
+5 contributors @Yemasthui @Benzi @ServePeak @WouterG @Hunchmun
+RawBlameHistory     3425 lines (3260 sloc)  168.259 kb
 /**
  *Copyright 2014 Yemasthui
  *Modifications (including forks) of the code to fit personal needs are allowed only for personal use and should refer back to the original source.
@@ -198,7 +214,7 @@
             startupVolume: 0, // 0-100
             startupEmoji: false, // true or false
             cmdDeletion: true,
-            maximumAfk: 12000,
+            maximumAfk: 120,
             afkRemoval: true,
             maximumDc: 60,
             bouncerPlus: true,
@@ -208,11 +224,11 @@
             maximumLocktime: 10,
             cycleGuard: true,
             maximumCycletime: 10,
-            voteSkip: true,
-            voteSkipLimit: 100,
-            historySkip: true,
+            voteSkip: false,
+            voteSkipLimit: 10,
+            historySkip: false,
             timeGuard: true,
-            maximumSongLength: 8,
+            maximumSongLength: 10,
             autodisable: true,
             commandCooldown: 30,
             usercommandsEnabled: true,
@@ -266,7 +282,7 @@
             motdEnabled: false,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
-            filterChat: false,
+            filterChat: true,
             etaRestriction: false,
             welcome: true,
             opLink: null,
@@ -277,7 +293,7 @@
             website: null,
             intervalMessages: [],
             messageInterval: 5,
-            songstats: false,
+            songstats: true,
             commandLiteral: "!",
             blacklists: {
                 NSFW: "https://rawgit.com/Yemasthui/basicBot-customization/master/blacklists/ExampleNSFWlist.json",
@@ -787,7 +803,7 @@
                 }
             }
             var greet = true;
-            var welcomeback = true;
+            var welcomeback = null;
             if (known) {
                 basicBot.room.users[index].inRoom = true;
                 var u = basicBot.userUtilities.lookupUser(user.id);
@@ -798,7 +814,7 @@
             }
             else {
                 basicBot.room.users.push(new basicBot.User(user.id, user.username));
-                welcomeback = true;
+                welcomeback = false;
             }
             for (var j = 0; j < basicBot.room.users.length; j++) {
                 if (basicBot.userUtilities.getUser(basicBot.room.users[j]).id === user.id) {
@@ -810,11 +826,11 @@
             if (basicBot.settings.welcome && greet) {
                 welcomeback ?
                     setTimeout(function (user) {
-                        API.sendChat(subChat(basicBot.chat.Здарова, бродяга @{name: user.username}));
+                        API.sendChat(subChat(basicBot.chat.welcomeback, {name: user.username}));
                     }, 1 * 1000, user)
                     :
                     setTimeout(function (user) {
-                        API.sendChat(subChat(basicBot.chat.Здарова,бандит @{name: user.username}));
+                        API.sendChat(subChat(basicBot.chat.welcome, {name: user.username}));
                     }, 1 * 1000, user);
             }
         },
@@ -1152,7 +1168,7 @@
                 basicBot.room.roomstats.chatmessages++;
             },
             spam: [
-                '322', 'хуй', 'вада хуй', '+', '-', 'лол', 'скип', 'mafia', 'zuera', 'zueira',
+                'hueh', 'hu3', 'brbr', 'heu', 'brbr', 'kkkk', 'spoder', 'mafia', 'zuera', 'zueira',
                 'zueria', 'aehoo', 'aheu', 'alguem', 'algum', 'brazil', 'zoeira', 'fuckadmins', 'affff', 'vaisefoder', 'huenaarea',
                 'hitler', 'ashua', 'ahsu', 'ashau', 'lulz', 'huehue', 'hue', 'huehuehue', 'merda', 'pqp', 'puta', 'mulher', 'pula', 'retarda', 'caralho', 'filha', 'ppk',
                 'gringo', 'fuder', 'foder', 'hua', 'ahue', 'modafuka', 'modafoka', 'mudafuka', 'mudafoka', 'ooooooooooooooo', 'foda'
@@ -1899,18 +1915,15 @@
                         for (var i = 0; i < chats.length; i++) {
                             var n = from[i].textContent;
                             if (name.trim() === n.trim()) {
-
                                 // var messagecid = $(message)[i].getAttribute('data-cid');
                                 // var emotecid = $(emote)[i].getAttribute('data-cid');
                                 // API.moderateDeleteChat(messagecid);
-
                                 // try {
                                 //     API.moderateDeleteChat(messagecid);
                                 // }
                                 // finally {
                                 //     API.moderateDeleteChat(emotecid);
                                 // }
-
                                 if (typeof $(message)[i].getAttribute('data-cid') == "undefined"){
                                     API.moderateDeleteChat($(emote)[i].getAttribute('data-cid')); // works well with normal messages but not with emotes due to emotes and messages are seperate.
                                 } else {
@@ -3182,7 +3195,6 @@
                              indexMuted = i;
                              wasMuted = true;
                              }
-
                              }
                              if (!wasMuted) return API.sendChat(subChat(basicBot.chat.notmuted, {name: chat.un}));
                              basicBot.room.mutedUsers.splice(indexMuted);
@@ -3284,7 +3296,7 @@
             },
 
             welcomeCommand: {
-                command: 'sup',
+                command: 'welcome',
                 rank: 'mod',
                 type: 'exact',
                 functionality: function (chat, cmd) {
@@ -3422,3 +3434,5 @@
 
     loadChat(basicBot.startup);
 }).call(this);
+Status API Training Shop Blog About
+© 2015 GitHub, Inc. Terms Privacy Security Contact
