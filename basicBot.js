@@ -180,10 +180,10 @@
 
     var basicBot = {
         version: "2.3.4",
-        status: false,
+        status: true,
         name: "basicBot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/Yemasthui/basicBot/master/basicBot.js",
+        scriptLink: "https://github.com/768loved/basicBot/edit/master/basicBot.js",
         cmdLink: "http://git.io/245Ppg",
         chatLink: "https://rawgit.com/Yemasthui/basicBot/master/lang/en.json",
         chat: null,
@@ -196,10 +196,10 @@
             chatLink: "https://rawgit.com/Yemasthui/basicBot/master/lang/en.json",
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
-            startupEmoji: false, // true or false
+            startupEmoji: true, // true or false
             cmdDeletion: true,
-            maximumAfk: 120,
-            afkRemoval: true,
+            maximumAfk: 12000,
+            afkRemoval: false,
             maximumDc: 60,
             bouncerPlus: true,
             blacklistEnabled: true,
@@ -208,11 +208,11 @@
             maximumLocktime: 10,
             cycleGuard: true,
             maximumCycletime: 10,
-            voteSkip: false,
-            voteSkipLimit: 10,
-            historySkip: false,
+            voteSkip: true,
+            voteSkipLimit: 100,
+            historySkip: true,
             timeGuard: true,
-            maximumSongLength: 10,
+            maximumSongLength: 8,
             autodisable: true,
             commandCooldown: 30,
             usercommandsEnabled: true,
@@ -266,7 +266,7 @@
             motdEnabled: false,
             motdInterval: 5,
             motd: "Temporary Message of the Day",
-            filterChat: true,
+            filterChat: false,
             etaRestriction: false,
             welcome: true,
             opLink: null,
@@ -277,7 +277,7 @@
             website: null,
             intervalMessages: [],
             messageInterval: 5,
-            songstats: true,
+            songstats: false,
             commandLiteral: "!",
             blacklists: {
                 NSFW: "https://rawgit.com/Yemasthui/basicBot-customization/master/blacklists/ExampleNSFWlist.json",
@@ -787,7 +787,7 @@
                 }
             }
             var greet = true;
-            var welcomeback = null;
+            var welcomeback = true;
             if (known) {
                 basicBot.room.users[index].inRoom = true;
                 var u = basicBot.userUtilities.lookupUser(user.id);
@@ -798,7 +798,7 @@
             }
             else {
                 basicBot.room.users.push(new basicBot.User(user.id, user.username));
-                welcomeback = false;
+                welcomeback = true;
             }
             for (var j = 0; j < basicBot.room.users.length; j++) {
                 if (basicBot.userUtilities.getUser(basicBot.room.users[j]).id === user.id) {
@@ -810,11 +810,11 @@
             if (basicBot.settings.welcome && greet) {
                 welcomeback ?
                     setTimeout(function (user) {
-                        API.sendChat(subChat(basicBot.chat.welcomeback, {name: user.username}));
+                        API.sendChat(subChat(basicBot.chat.Хаю хай @{name: user.username}));
                     }, 1 * 1000, user)
                     :
                     setTimeout(function (user) {
-                        API.sendChat(subChat(basicBot.chat.welcome, {name: user.username}));
+                        API.sendChat(subChat(basicBot.chat.Хаю хай @{name: user.username}));
                     }, 1 * 1000, user);
             }
         },
@@ -914,7 +914,7 @@
             }*/
 
             if (basicBot.settings.historySkip) {
-                var alreadyPlayed = false;
+                var alreadyPlayed = true;
                 var apihistory = API.getHistory();
                 var name = obj.dj.username;
                 for (var i = 0; i < apihistory.length; i++) {
@@ -1056,7 +1056,7 @@
                     API.sendChat(subChat(basicBot.chat.adfly, {name: chat.un}));
                     return true;
                 }
-                if (msg.indexOf('autojoin was not enabled') > 0 || msg.indexOf('AFK message was not enabled') > 0 || msg.indexOf('!afkdisable') > 0 || msg.indexOf('!joindisable') > 0 || msg.indexOf('autojoin disabled') > 0 || msg.indexOf('AFK message disabled') > 0) {
+                if (msg.indexOf('autojoin was not enabled') > 0 || msg.indexOf('Нахуя ты боту пишешь? ты че, ебанутый?') > 0 || msg.indexOf('!afkdisable') > 0 || msg.indexOf('!joindisable') > 0 || msg.indexOf('autojoin disabled') > 0 || msg.indexOf('AFK message disabled') > 0) {
                     API.moderateDeleteChat(chat.cid);
                     return true;
                 }
@@ -1152,7 +1152,7 @@
                 basicBot.room.roomstats.chatmessages++;
             },
             spam: [
-                'hueh', 'hu3', 'brbr', 'heu', 'brbr', 'kkkk', 'spoder', 'mafia', 'zuera', 'zueira',
+                '322', 'хуй', 'вада хуй', '+', '-', 'лол', 'скип', 'mafia', 'zuera', 'zueira',
                 'zueria', 'aehoo', 'aheu', 'alguem', 'algum', 'brazil', 'zoeira', 'fuckadmins', 'affff', 'vaisefoder', 'huenaarea',
                 'hitler', 'ashua', 'ahsu', 'ashau', 'lulz', 'huehue', 'hue', 'huehuehue', 'merda', 'pqp', 'puta', 'mulher', 'pula', 'retarda', 'caralho', 'filha', 'ppk',
                 'gringo', 'fuder', 'foder', 'hua', 'ahue', 'modafuka', 'modafoka', 'mudafuka', 'mudafoka', 'ooooooooooooooo', 'foda'
@@ -1767,7 +1767,8 @@
                     'gives you an Oreo cookie with a glass of milk!',
                     'gives you a rainbow cookie made with love :heart:',
                     'gives you an old cookie that was left out in the rain, it\'s moldy.',
-                    'bakes you fresh cookies, it smells amazing.'
+                    'bakes you fresh cookies, it smells amazing.',
+                    'gives you a pink cookie. It reads "I love you"'.
                 ],
                 getCookie: function () {
                     var c = Math.floor(Math.random() * this.cookies.length);
@@ -3284,7 +3285,7 @@
             },
 
             welcomeCommand: {
-                command: 'welcome',
+                command: 'sup',
                 rank: 'mod',
                 type: 'exact',
                 functionality: function (chat, cmd) {
