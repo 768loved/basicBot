@@ -1,19 +1,3 @@
-Skip to content
- This repository
-Explore
-Gist
-Blog
-Help
-@h4bUb h4bUb
- 
- Watch 21
-  Star 46
-  Fork 349
-Yemasthui/basicBot
- branch: master  basicBot/basicBot.js
-@BenziBenzi 2 days ago Added Autoskip to !status
-5 contributors @Yemasthui @Benzi @ServePeak @WouterG @Hunchmun
-RawBlameHistory     3425 lines (3260 sloc)  168.259 kb
 /**
  *Copyright 2014 Yemasthui
  *Modifications (including forks) of the code to fit personal needs are allowed only for personal use and should refer back to the original source.
@@ -3434,5 +3418,3 @@ RawBlameHistory     3425 lines (3260 sloc)  168.259 kb
 
     loadChat(basicBot.startup);
 }).call(this);
-Status API Training Shop Blog About
-© 2015 GitHub, Inc. Terms Privacy Security Contact
