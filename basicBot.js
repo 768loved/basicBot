@@ -3284,7 +3284,7 @@
             },
 
             welcomeCommand: {
-                command: 'welcome',
+                command: 'sup',
                 rank: 'mod',
                 type: 'exact',
                 functionality: function (chat, cmd) {
