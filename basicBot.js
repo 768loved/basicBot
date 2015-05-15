@@ -183,7 +183,7 @@
         status: true,
         name: "basicBot",
         loggedInID: null,
-        scriptLink: "https://github.com/768loved/basicBot/edit/master/basicBot.js",
+        scriptLink: "https://rawgit.com/768loved/basicBot/master/basicBot.js",
         cmdLink: "http://git.io/245Ppg",
         chatLink: "https://rawgit.com/768loved/basicBot/master/lang/en.json",
         chat: null,
